@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		canvas{
+			background-color: blue;
+		}
+	</style>
+	<title></title>
+</head>
+<body>
+<canvas id="canvas" width="1300" height="600" style="border:1px solid red">
+	This is a canvas
+</canvas>
+<script type="text/javascript">
+function init() {
+  window.requestAnimationFrame(draw);
+}
+var x=500;
+var y=300;
+var lx=1;
+var ly=1;
+function draw() {
+  var ctx = document.getElementById('canvas').getContext('2d');
+
+  ctx.globalCompositeOperation = 'destination-over';
+  ctx.clearRect(x-200, y-200, x+200, y+200);
+  ctx.beginPath();
+  
+  ctx.arc(x,y, 50, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.fillStyle = "#000000";
+    ctx.fill();
+  if(x>=1250 || x<=50){lx*=-1;}
+  if(y>=550 || y<=50){ly*=-1;}
+  x=x+4*lx;
+  y=y-2*ly;
+  window.requestAnimationFrame(draw);
+}
+
+init();	
+</script>
+
+</body>
+
+</html>
