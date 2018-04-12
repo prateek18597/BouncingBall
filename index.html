@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style type="text/css">
-		canvas{
-			background-color: blue;
-		}
-	</style>
-	<title></title>
+  <style type="text/css">
+    canvas{
+      background-color: blue;
+    }
+  </style>
+  <title></title>
 </head>
 <body>
 <canvas id="canvas" width="1300" height="600" style="border:1px solid red">
-	This is a canvas
+  This is a canvas
 </canvas>
 <script type="text/javascript">
 function init() {
@@ -18,13 +18,52 @@ function init() {
 }
 var x=500;
 var y=300;
+var x1=150;
+var y1=100;
+var vx1=6;
+var vy1=4;
+var vx=8;
+var vy=-4;
+
 var lx=1;
-var ly=1;
+var ly=-1;
+var lx1=1;
+var ly1=1;
+
+function collision()
+{
+  
+  if(Math.sqrt((x+vx*lx-(x1+vx1*lx1))*(x+vx*lx-(x1+vx1*lx1))+(y+vy*ly-y1-vy1*ly1)*(y+vy*ly-y1-vy1*ly1))<=100)
+  {
+    var temp=vx1;
+    vx1=vx;
+    vx=temp;
+    temp=vy1;
+    vy1=vy;
+    vy=temp;
+    temp=lx;
+    lx=lx1;
+    lx1=temp;
+    temp=ly1;
+    ly1=ly;
+    ly=temp;
+  }
+  x=x+vx*lx;
+    y=y+vy*ly;
+    x1=x1+vx1*lx1;
+    y1=y1+vy1*ly1;  
+  // collision();
+  window.requestAnimationFrame(draw);
+  
+  
+}
+
 function draw() {
   var ctx = document.getElementById('canvas').getContext('2d');
 
   ctx.globalCompositeOperation = 'destination-over';
-  ctx.clearRect(x-200, y-200, x+200, y+200);
+
+  ctx.clearRect(0, 0, 1300, 600);
   ctx.beginPath();
   
   ctx.arc(x,y, 50, 0, Math.PI * 2);
@@ -33,12 +72,19 @@ function draw() {
     ctx.fill();
   if(x>=1250 || x<=50){lx*=-1;}
   if(y>=550 || y<=50){ly*=-1;}
-  x=x+4*lx;
-  y=y-2*ly;
-  window.requestAnimationFrame(draw);
+  
+  ctx.beginPath();
+  // ctx.clearRect(x1-50, y1-50, 50, 50);
+  ctx.arc(x1,y1, 50, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.fillStyle = "red";
+    ctx.fill();
+  if(x1>=1250 || x1<=50){lx1*=-1;}
+  if(y1>=550 || y1<=50){ly1*=-1;}
+collision();  
 }
 
-init();	
+init(); 
 </script>
 
 </body>
