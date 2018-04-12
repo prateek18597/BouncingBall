@@ -16,12 +16,25 @@
 function init() {
   window.requestAnimationFrame(draw);
 }
+
+
+
 var x=500;
 var y=300;
 var x1=150;
 var y1=100;
 var vx1=6;
 var vy1=4;
+var x2=750;
+var y2=500;
+var vx2=-2;
+var vy2=3;
+var x3=350;
+var y3=200;
+var vx3=3;
+var vy3=2;
+
+
 var vx=8;
 var vy=-4;
 
@@ -29,6 +42,10 @@ var lx=1;
 var ly=-1;
 var lx1=1;
 var ly1=1;
+var lx2=1;
+var ly2=1;
+var lx3=1;
+var ly3=1;
 
 function collision()
 {
@@ -48,11 +65,100 @@ function collision()
     ly1=ly;
     ly=temp;
   }
+  if(Math.sqrt((x+vx*lx-(x2+vx2*lx2))*(x+vx*lx-(x2+vx2*lx2))+(y+vy*ly-y2-vy2*ly2)*(y+vy*ly-y2-vy2*ly2))<=100)
+  {
+    var temp=vx2;
+    vx2=vx;
+    vx=temp;
+    temp=vy2;
+    vy2=vy;
+    vy=temp;
+    temp=lx;
+    lx=lx2;
+    lx2=temp;
+    temp=ly2;
+    ly2=ly;
+    ly=temp;
+  }
+  if(Math.sqrt((x2+vx2*lx2-(x1+vx1*lx1))*(x2+vx2*lx2-(x1+vx1*lx1))+(y2+vy2*ly2-y1-vy1*ly1)*(y2+vy2*ly2-y1-vy1*ly1))<=100)
+  {
+    var temp=vx1;
+    vx1=vx2;
+    vx2=temp;
+    temp=vy1;
+    vy1=vy2;
+    vy2=temp;
+    temp=lx2;
+    lx2=lx1;
+    lx1=temp;
+    temp=ly1;
+    ly1=ly2;
+    ly2=temp;
+  }
+
+
+  if(Math.sqrt((x+vx*lx-(x3+vx3*lx3))*(x+vx*lx-(x3+vx3*lx3))+(y+vy*ly-y3-vy3*ly3)*(y+vy*ly-y3-vy3*ly3))<=100)
+  {
+    var temp=vx3;
+    vx3=vx;
+    vx=temp;
+    temp=vy3;
+    vy3=vy;
+    vy=temp;
+    temp=lx;
+    lx=lx3;
+    lx3=temp;
+    temp=ly3;
+    ly3=ly;
+    ly=temp;
+  }
+  if(Math.sqrt((x3+vx3*lx3-(x2+vx2*lx2))*(x3+vx3*lx3-(x2+vx2*lx2))+(y3+vy3*ly3-y2-vy2*ly2)*(y3+vy3*ly3-y2-vy2*ly2))<=100)
+  {
+    var temp=vx2;
+    vx2=vx3;
+    vx3=temp;
+    temp=vy2;
+    vy2=vy3;
+    vy3=temp;
+    temp=lx3;
+    lx3=lx2;
+    lx2=temp;
+    temp=ly2;
+    ly2=ly3;
+    ly3=temp;
+  }
+  if(Math.sqrt((x3+vx3*lx3-(x1+vx1*lx1))*(x3+vx3*lx3-(x1+vx1*lx1))+(y3+vy3*ly3-y1-vy1*ly1)*(y3+vy3*ly3-y1-vy1*ly1))<=100)
+  {
+    var temp=vx1;
+    vx1=vx3;
+    vx3=temp;
+    temp=vy1;
+    vy1=vy3;
+    vy3=temp;
+    temp=lx3;
+    lx3=lx1;
+    lx1=temp;
+    temp=ly1;
+    ly1=ly3;
+    ly3=temp;
+  }
   x=x+vx*lx;
     y=y+vy*ly;
     x1=x1+vx1*lx1;
     y1=y1+vy1*ly1;  
-  // collision();
+    x2=x2+vx2*lx2;
+    y2=y2+vy2*ly2;
+    x3=x3+vx3*lx3;
+    y3=y3+vy3*ly3;
+  //
+  //   if(x1>=1250 || x1<=50)
+  //   {lx1*=-1;}
+  // if(y1>=550 || y1<=50){ly1*=-1;}
+  // if(x2>=1250 || x2<=50){lx2*=-1;}
+  // if(y2>=550 || y2<=50){ly2*=-1;}
+  // if(x>=1250 || x<=50){lx*=-1;}
+  // if(y>=550 || y<=50){ly*=-1;}
+  // // collision();
   window.requestAnimationFrame(draw);
   
   
@@ -70,8 +176,28 @@ function draw() {
   ctx.stroke();
   ctx.fillStyle = "#000000";
     ctx.fill();
-  if(x>=1250 || x<=50){lx*=-1;}
-  if(y>=550 || y<=50){ly*=-1;}
+  if(x>=1250 || x<=50){lx*=-1;
+    if(x>1250)
+    {
+      x=1250;
+    }
+    if(x<50)
+    {
+      x=50;
+    }
+  }
+  if(y>=550 || y<=50)
+    {
+      ly*=-1;
+      if(y>550)
+    {
+      y=550;
+    }
+    if(y<50)
+    {
+      y=50;
+    }
+    }
   
   ctx.beginPath();
   // ctx.clearRect(x1-50, y1-50, 50, 50);
@@ -79,8 +205,86 @@ function draw() {
   ctx.stroke();
   ctx.fillStyle = "red";
     ctx.fill();
-  if(x1>=1250 || x1<=50){lx1*=-1;}
-  if(y1>=550 || y1<=50){ly1*=-1;}
+
+    ctx.beginPath();
+  // ctx.clearRect(x1-50, y1-50, 50, 50);
+  ctx.arc(x2,y2, 50, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.fillStyle = "green";
+    ctx.fill();
+
+    ctx.beginPath();
+  // ctx.clearRect(x1-50, y1-50, 50, 50);
+  ctx.arc(x3,y3, 50, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.fillStyle = "yellow";
+    ctx.fill();
+
+  if(x1>=1250 || x1<=50){lx1*=-1;
+    if(x1>1250)
+    {
+      x1=1250;
+    }
+    if(x1<50)
+    {
+      x1=50;
+    }
+  }
+  if(y1>=550 || y1<=50)
+    {
+      ly1*=-1;
+      if(y1>550)
+    {
+      y1=550;
+    }
+    if(y1<50)
+    {
+      y1=50;
+    }
+    }if(x2>=1250 || x2<=50){lx2*=-1;
+    if(x2>1250)
+    {
+      x2=1250;
+    }
+    if(x2<50)
+    {
+      x2=50;
+    }
+  }
+  if(y2>=550 || y2<=50)
+    {
+      ly2*=-1;
+      if(y2>550)
+    {
+      y2=550;
+    }
+    if(y2<50)
+    {
+      y2=50;
+    }
+    }
+    if(x3>=1250 || x3<=50){lx3*=-1;
+    if(x3>1250)
+    {
+      x3=1250;
+    }
+    if(x3<50)
+    {
+      x3=50;
+    }
+  }
+  if(y3>=550 || y3<=50)
+    {
+      ly3*=-1;
+      if(y3>550)
+    {
+      y3=550;
+    }
+    if(y3<50)
+    {
+      y3=50;
+    }
+    }
 collision();  
 }
 
