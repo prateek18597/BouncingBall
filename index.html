@@ -5,13 +5,18 @@
     canvas{
       background-color: blue;
     }
+    body{
+      background-color: blue;
+    }
   </style>
   <title></title>
 </head>
 <body>
-<canvas id="canvas" width="1300" height="600" style="border:1px solid red">
+  <div width=100% height=100%>
+<canvas id="canvas" width= style="border:1px solid red">
   This is a canvas
 </canvas>
+<div>
 <script type="text/javascript">
 function init() {
   window.requestAnimationFrame(draw);
@@ -46,6 +51,11 @@ var lx2=1;
 var ly2=1;
 var lx3=1;
 var ly3=1;
+
+var canvas=document.getElementById('canvas');
+canvas.width=screen.availWidth-25;
+canvas.height=screen.availHeight-125;
+var ctx = document.getElementById('canvas').getContext('2d');
 
 function collision()
 {
@@ -137,7 +147,7 @@ function collision()
     vy3=temp;
     temp=lx3;
     lx3=lx1;
-    lx1=temp;
+    // lx1=temp;
     temp=ly1;
     ly1=ly3;
     ly3=temp;
@@ -165,33 +175,35 @@ function collision()
 }
 
 function draw() {
-  var ctx = document.getElementById('canvas').getContext('2d');
+  // var ctx = document.getElementById('canvas').getContext('2d');
 
   ctx.globalCompositeOperation = 'destination-over';
 
-  ctx.clearRect(0, 0, 1300, 600);
+  ctx.clearRect(0, 0, screen.width, screen.height);
   ctx.beginPath();
   
   ctx.arc(x,y, 50, 0, Math.PI * 2);
   ctx.stroke();
   ctx.fillStyle = "#000000";
     ctx.fill();
-  if(x>=1250 || x<=50){lx*=-1;
-    if(x>1250)
+  if(x>=canvas.width-50 || x<=50)
     {
-      x=1250;
+      lx*=-1;
+    if(x>canvas.width-50)
+    {
+      x=canvas.width-50;
     }
     if(x<50)
     {
       x=50;
     }
   }
-  if(y>=550 || y<=50)
+  if(y>=canvas.height-50 || y<=50)
     {
       ly*=-1;
-      if(y>550)
+      if(y>canvas.height-50)
     {
-      y=550;
+      y=canvas.height-50;
     }
     if(y<50)
     {
@@ -220,65 +232,72 @@ function draw() {
   ctx.fillStyle = "yellow";
     ctx.fill();
 
-  if(x1>=1250 || x1<=50){lx1*=-1;
-    if(x1>1250)
+  if(x1>=canvas.width-50 || x1<=50)
     {
-      x1=1250;
+      lx1*=-1;
+    if(x1>canvas.width-50)
+    {
+      x1=canvas.width-50;
     }
     if(x1<50)
     {
       x1=50;
     }
   }
-  if(y1>=550 || y1<=50)
+  if(y1>=canvas.height-50 || y1<=50)
     {
       ly1*=-1;
-      if(y1>550)
+      if(y1>canvas.height-50)
     {
-      y1=550;
+      y1=canvas.height-50;
     }
     if(y1<50)
     {
       y1=50;
     }
-    }if(x2>=1250 || x2<=50){lx2*=-1;
-    if(x2>1250)
+    }
+
+  if(x2>=canvas.width-50 || x2<=50)
     {
-      x2=1250;
+      lx2*=-1;
+    if(x2>canvas.width-50)
+    {
+      x2=canvas.width-50;
     }
     if(x2<50)
     {
       x2=50;
     }
   }
-  if(y2>=550 || y2<=50)
+  if(y2>=canvas.height-50 || y2<=50)
     {
       ly2*=-1;
-      if(y2>550)
+      if(y2>canvas.height-50)
     {
-      y2=550;
+      y2=canvas.height-50;
     }
     if(y2<50)
     {
       y2=50;
     }
-    }
-    if(x3>=1250 || x3<=50){lx3*=-1;
-    if(x3>1250)
+    } if(x3>=canvas.width-50 || x3<=50)
     {
-      x3=1250;
+      lx3*=-1;
+    if(x3>canvas.width-50)
+    {
+      x3=canvas.width-50;
     }
     if(x3<50)
     {
       x3=50;
     }
   }
-  if(y3>=550 || y3<=50)
+  if(y3>=canvas.height-50 || y3<=50)
     {
       ly3*=-1;
-      if(y3>550)
+      if(y3>canvas.height-50)
     {
-      y3=550;
+      y3=canvas.height-50;
     }
     if(y3<50)
     {
